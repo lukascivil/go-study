@@ -1,8 +1,8 @@
-package main
+package types
 
 import "github.com/google/uuid"
 
-type album struct {
+type Album struct {
 	ID     string  `json:"id"`
 	Title  string  `json:"title"`
 	Artist string  `json:"artist"`
@@ -15,19 +15,19 @@ type album struct {
 // }
 
 
-func newAlbum(title string, artist string, price float64) album {
-	return album{
+func NewAlbum(title string, artist string, price float64) Album {
+	return Album{
 		ID: uuid.New().String(), Title: title, Artist: artist, Price: price,
 	}
 }
 
-func (album album) format() album {
+func (album Album) Format() Album {
 	album.ID = "success"
 	
 	return album
 }
 
-func (album *album) update() {
+func (album *Album) Update() {
 	album.ID = "success"
 }
 
