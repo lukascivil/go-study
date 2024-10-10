@@ -10,7 +10,7 @@ func main() {
 	// http.HandleFunc("/albums", getAlbums)
 	// http.HandleFunc("/fib", getFib)
 	
-	responses := subjects.MakeRequestsWithWaitGroup()
+	responses := subjects.MakeRequestsWithErrorGroup()
 
 	subjects.SaveJsonToFile(responses, "requests")
 }
