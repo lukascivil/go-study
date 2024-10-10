@@ -7,6 +7,14 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
+/**
+ * MakeRequests make 4 requests to the same endpoint.
+ * and return the responses in a [][]byte.
+ * it was used:
+ * - sync.WaitGroup to wait for all goroutines to finish;
+ * - A channel to collect the responses;
+ * - Goroutines to make the requests;
+**/ 
 func MakeRequests () [][]byte {
 	client := resty.New()
 	var wg = sync.WaitGroup{}
