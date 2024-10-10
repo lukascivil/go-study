@@ -12,10 +12,13 @@ import (
 
 var client = resty.New()
 
-
 /**
  * MakeRequests make 4 requests to the same endpoint.
  * and return the responses in a [][]byte.
+ * It was used:
+**/
+
+/**
  * It was used:
  * - sync.WaitGroup to wait for all goroutines to finish;
  * - A channel to collect the responses;
@@ -139,7 +142,7 @@ func MakeRequestsWithWaitGroup () [][]byte {
 func MakeRequestsWithErrorGroup () [][]byte {
 	results := make([][]byte, 4)
 	errorGroup, ctx := errgroup.WithContext(context.Background())
-	
+
 	errorGroup.Go(func () error{
 		resp1, _ := client.R().Get("https://jsonplaceholder.typicode.com/posts/1")
 		fmt.Println(1)
