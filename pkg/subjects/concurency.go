@@ -16,7 +16,7 @@ var client = resty.New()
 /**
  * MakeRequests make 4 requests to the same endpoint.
  * and return the responses in a [][]byte.
- * it was used:
+ * It was used:
  * - sync.WaitGroup to wait for all goroutines to finish;
  * - A channel to collect the responses;
  * - Goroutines to make the requests;
@@ -79,6 +79,11 @@ func MakeRequestsWithWaitGroupAndChannel () [][]byte {
 	return allResponses
 }
 
+/**
+ * It was used:
+ * - sync.WaitGroup to wait for all goroutines to finish;
+ * - Goroutines to make the requests;
+**/ 
 func MakeRequestsWithWaitGroup () [][]byte {
 	client := resty.New()
 	var wg = sync.WaitGroup{}
@@ -126,6 +131,11 @@ func MakeRequestsWithWaitGroup () [][]byte {
 	return results
 }
 
+/**
+ * It was used:
+ * - errorGroup to wait for all goroutines to finish and handle errors;
+ * - Goroutines to make the requests;
+**/ 
 func MakeRequestsWithErrorGroup () [][]byte {
 	results := make([][]byte, 4)
 	errorGroup, ctx := errgroup.WithContext(context.Background())
