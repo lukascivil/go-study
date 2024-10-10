@@ -31,14 +31,11 @@ func GetRoot(w http.ResponseWriter, r *http.Request) {
 func GetAlbums(w http.ResponseWriter, r *http.Request) {
 	data := []types.Album{}
 	dataWithNoPointer := types.NewAlbum("success0", "John Coltrane", 56.99)
-	// dataWithNoPointer.addItemToAlbum("1", "1")
 
 	data = append(data, dataWithNoPointer)
 	data = append(data, dataWithNoPointer)
 	data = append(data, types.NewAlbum("success1", "Gerry Mulligan", 17.99))
 	data = append(data, types.NewAlbum("success2", "Sarah Vaughan", 39.99))
-
-	SaveJsonToFile(data[0])
 
   w.Header().Set("Content-Type", "application/json")
   w.WriteHeader(http.StatusCreated)

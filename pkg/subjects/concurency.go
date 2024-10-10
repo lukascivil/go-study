@@ -7,17 +7,17 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
-func MakeRequests () []string {
+func MakeRequests () [][]byte {
 	client := resty.New()
 	var wg = sync.WaitGroup{}
 	// Canal para coletar as respostas
-	responseChannel := make(chan string, 4)
+	responseChannel := make(chan []byte, 4)
 	
 	wg.Add(1)
 	go func () {
 		resp2, _ := client.R().Get("https://jsonplaceholder.typicode.com/posts")
 		fmt.Println(1)
-		responseChannel <- resp2.String()
+		responseChannel <- resp2.Body()
 		wg.Done()
 	}()
 
@@ -25,7 +25,7 @@ func MakeRequests () []string {
 	go func () {
 		resp3, _ := client.R().Get("https://jsonplaceholder.typicode.com/posts")
 		fmt.Println(2)
-		responseChannel <- resp3.String()
+		responseChannel <- resp3.Body()
 		wg.Done()
 	}()
 
@@ -33,7 +33,7 @@ func MakeRequests () []string {
 	go func () {
 		resp4, _ := client.R().Get("https://jsonplaceholder.typicode.com/posts")
 		fmt.Println(3)
-		responseChannel <- resp4.String()
+		responseChannel <- resp4.Body()
 		wg.Done()
 	}()
 
@@ -41,7 +41,7 @@ func MakeRequests () []string {
 	go func () {
 		resp5, _ := client.R().Get("https://jsonplaceholder.typicode.com/posts")
 		fmt.Println(4)
-		responseChannel <- resp5.String()
+		responseChannel <- resp5.Body()
 		wg.Done()
 	}()
 
@@ -54,7 +54,7 @@ func MakeRequests () []string {
 
 
 	// Coletamos todas as respostas
-	var allResponses []string
+	var allResponses [][]byte
 	for response := range responseChannel {
 		allResponses = append(allResponses, response)
 	}

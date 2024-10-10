@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"go-study/pkg/subjects"
 )
 
@@ -21,8 +19,10 @@ func main() {
 	
 
 	cafe := subjects.MakeRequests()
+
+	subjects.SaveJsonToFile(cafe, "requests")
 	
-	fmt.Println("tamanho", cafe)
+	// fmt.Println("tamanho", cafe)
 
 
 	// err := http.ListenAndServe(":3333", nil)
