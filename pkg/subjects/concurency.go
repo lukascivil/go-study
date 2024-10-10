@@ -15,7 +15,7 @@ func MakeRequests () [][]byte {
 	
 	wg.Add(1)
 	go func () {
-		resp2, _ := client.R().Get("https://jsonplaceholder.typicode.com/posts")
+		resp2, _ := client.R().Get("https://jsonplaceholder.typicode.com/posts/1")
 		fmt.Println(1)
 		responseChannel <- resp2.Body()
 		wg.Done()

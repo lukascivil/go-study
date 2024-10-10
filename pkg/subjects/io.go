@@ -10,10 +10,18 @@ func SaveJsonToFile(listOfJson [][]byte, fileName string) {
 	var jsonObjects []interface{}
 
 	for _, v := range listOfJson {
-		var obj []interface{}
+		var array []interface{}
+		var object map[string]interface{}
 
-		json.Unmarshal(v, &obj)
-		jsonObjects = append(jsonObjects, obj)
+		err := json.Unmarshal(v, &array)
+
+		if(err != nil) {
+			json.Unmarshal(v, &object)
+
+			jsonObjects = append(jsonObjects, object)
+		} else {
+			jsonObjects = append(jsonObjects, array)
+		}
 	}
 
 	finalFileName := fmt.Sprintf("%s.json", fileName)
